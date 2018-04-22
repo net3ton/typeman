@@ -6,7 +6,7 @@ FINAL_SCREEN = "#complete"
 function init(self)
 	msg.post(".", "acquire_input_focus")
 
-	self.curInd = 2
+	self.curInd = 4
 	self.current = ""
 	self.levelToLoad = ""
 
