@@ -13,6 +13,21 @@ components {
     w: 1.0
   }
 }
+components {
+  id: "wrong_cmd"
+  component: "/sounds/wrong_cmd.sound"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+}
 embedded_components {
   id: "promt"
   type: "label"
@@ -52,7 +67,7 @@ embedded_components {
   "blend_mode: BLEND_MODE_ALPHA\n"
   "line_break: false\n"
   "text: \"cmd:\"\n"
-  "font: \"/builtins/fonts/system_font.font\"\n"
+  "font: \"/fonts/system_font.font\"\n"
   "material: \"/builtins/fonts/label.material\"\n"
   ""
   position {
@@ -108,7 +123,7 @@ embedded_components {
   "text: \"cmd\\n"
   "\"\n"
   "  \"\"\n"
-  "font: \"/builtins/fonts/system_font.font\"\n"
+  "font: \"/fonts/system_font.font\"\n"
   "material: \"/builtins/fonts/label.material\"\n"
   ""
   position {

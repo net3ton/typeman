@@ -1,9 +1,8 @@
-local GRAVITY = -5
-local JUMP_SPEED = 120
+local GRAVITY = -10
+local JUMP_SPEED = 160
 local RUN_SPEED = 20
 
 function init(self)
-	--self.pos = go.get_position()
 	self.direction = -1
 	self.velocity = vmath.vector3()
 
@@ -18,23 +17,20 @@ function update(self, dt)
 
 	self.velocity.x = RUN_SPEED * self.direction
 
-	--print(go.get_position())
 	go.set_position(go.get_position() + self.velocity * dt)
 
-	--print(go.get_position())
-	--print(self.velocity * dt)
 	--msg.post("@render:", "draw_line", {start_point = go.get_position(), end_point = go.get_position() + self.velocity, color = vmath.vector4(0, 0, 1, 0)})
-
 	--self.correction = vmath.vector3()
 	--self.velocity.x = RUN_SPEED * self.direction
-	self.grounded = false
 
+	set_grounded(self, false)
 	msg.post("main:/camera#script", "slope", { val = go.get_position().x })
 end
 
 function jump(self)
 	if self.grounded then
 		self.velocity.y = JUMP_SPEED
+		msg.post("#jump", "play_sound")
 	end
 end
 
@@ -43,6 +39,26 @@ function turn(self)
 		self.direction = -self.direction
 		sprite.set_hflip("#sprite", self.direction > 0)
 	end
+end
+
+function set_grounded(self, grounded)
+	if self.grounded == grounded then
+		return
+	end
+
+	self.grounded = grounded
+
+	if grounded then
+		--print("run")
+		set_animation1(hash("run"))
+	else
+		--print("jump")
+		set_animation1(hash("jump"))
+	end
+end
+
+function set_animation1(anim)
+	--msg.post("#sprite", "play_animation", { id = amim })
 end
 
 function handle_contact(self, normal, distance)
@@ -59,7 +75,7 @@ function handle_contact(self, normal, distance)
 	end
 
 	if normal.y > 0.7 then
-		self.grounded = true
+		set_grounded(self, true)
 	end
 
 	local toground = vmath.dot(self.velocity, normal)
@@ -70,17 +86,18 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("contact_point_response") then
-		if message.group == hash("ground") or message.group == hash("wall") then
+		if message.group == hash("ground") then
 			handle_contact(self, message.normal, message.distance)
+		--elseif message.group == hash("dunger") then
 		end
 	elseif message_id == hash("jump") then
 		jump(self)
 	elseif message_id == hash("turn") then
 		turn(self)
+	elseif message_id == hash("exit_level") then
+		go.animate("#sprite", "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5)
 	end
 end
 
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Remove this function if not needed
-end
+--function on_reload(self)
+--end

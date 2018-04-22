@@ -20,6 +20,8 @@ function check_cmd(cmd)
 		msg.post("hero#script", "jump")
 	elseif cmd == "turn" then
 		msg.post("hero#script", "turn")
+	else
+		msg.post("#wrong_cmd", "play_sound")
 	end
 end
 

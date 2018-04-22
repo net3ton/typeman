@@ -2,6 +2,12 @@ images {
   image: "/images/typeman_cmd.png"
 }
 images {
+  image: "/images/typeman_sign.png"
+}
+images {
+  image: "/images/typeman_sign_on.png"
+}
+images {
   image: "/images/typeman_door.png"
 }
 margin: 0

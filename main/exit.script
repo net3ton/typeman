@@ -1,0 +1,31 @@
+function init(self)
+	self.time = 0
+	self.pos = go.get_position()
+	self.finished = false
+
+	--go.set(".", "position.y", 50)
+	--go.animate("#sign", "position.y",go.PLAYBACK_LOOP_PINGPONG, 30, go.EASING_OUTBOUNCE, 2)
+	--go.animate("#sign", "tint.w", go.PLAYBACK_LOOP_PINGPONG, 0, go.EASING_INOUTSINE, 2)
+end
+
+--function final(self)
+--end
+
+function update(self, dt)
+	self.time = self.time + dt
+
+	--local curentPos = vmath.vector3(self.pos)
+	--curentPos.y = self.pos.y + (math.sin(self.time) + 1) * OFFSET
+	--go.set_position(curentPos)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("contact_point_response") and not self.finished then
+		self.finished = true
+		msg.post("hero#script", "exit_level")
+		msg.post("main:/loader#script", "next_level")
+	end
+end
+
+--function on_reload(self)
+--end
