@@ -9,6 +9,7 @@ function init(self)
 	self.direction = -1
 	self.grounded = true
 	self.groundedLast = self.grounded
+	self.curAnim = ""
 
 	turn(self)
 end
@@ -49,20 +50,26 @@ function turn(self)
 end
 
 function update_animation(self)
-	--print(math.abs(self.pos.x - self.posLast.x))
-	--if self.grounded and math.abs(self.pos.x - self.posLast.x) < 0.001 then
-	--	msg.post("#sprite", "play_animation", { id = hash("idle") })
-	--	return
-	--end
+	if self.grounded and math.abs(self.pos.x - self.posLast.x) < 0.001 then
+		set_animation(self, "idle")
+		return
+	end
 
-	if not self.grounded == self.groundedLast then
+	if not (self.grounded == self.groundedLast) then
 		if self.grounded then
-			msg.post("#sprite", "play_animation", { id = hash("run") })
+			set_animation(self, "run")
 			msg.post("main:/camera#script", "jump", { start = false })
 		else
-			msg.post("#sprite", "play_animation", { id = hash("jump") })
+			set_animation(self, "jump")
 			msg.post("main:/camera#script", "jump", { start = true })
 		end
+	end
+end
+
+function set_animation(self, anim_str)
+	if not (self.curAnim == anim_str) then
+		self.curAnim = anim_str
+		msg.post("#sprite", "play_animation", { id = hash(anim_str) })
 	end
 end
 
@@ -97,6 +104,3 @@ function on_message(self, message_id, message, sender)
 		go.animate("#sprite", "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5)
 	end
 end
-
---function on_reload(self)
---end
