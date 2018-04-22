@@ -1,0 +1,36 @@
+local BLINKING = 3
+local SHOW = 10
+
+function init(self)
+	self.time = 0
+	self.showing = false;
+	msg.post(".", "disable")
+end
+
+function update(self, dt)
+	if self.showing then
+		self.time = self.time + dt
+
+		if self.time >= BLINKING then
+			go.cancel_animations("#cmd", "color")
+			go.cancel_animations("#info", "color")
+		end
+	end
+end
+
+function show_new_command(self, command)
+	msg.post(".", "enable")
+	label.set_text("#cmd", command)
+
+	go.animate("#cmd", "color", go.PLAYBACK_LOOP_PINGPONG, vmath.vector4(0,0,0,0), go.EASING_INCIRC, 1)
+	go.animate("#info", "color", go.PLAYBACK_LOOP_PINGPONG, vmath.vector4(0,0,0,0), go.EASING_INCIRC, 1)
+
+	self.time = 0
+	self.showing = true
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("show_command") then
+		show_new_command(self, message.cmd)
+	end
+end

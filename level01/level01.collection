@@ -43,7 +43,7 @@ instances {
   id: "hero"
   prototype: "/main/hero.go"
   position {
-    x: -50.0
+    x: -73.0
     y: -44.0
     z: 0.0
   }
@@ -62,9 +62,50 @@ instances {
 instances {
   id: "exit"
   prototype: "/main/exit.go"
+  children: "exitsign"
   position {
     x: 72.0
     y: -28.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "exitsign"
+  prototype: "/main/exitsign.go"
+  position {
+    x: 0.0
+    y: 12.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "newcmd"
+  prototype: "/main/newcmd.go"
+  position {
+    x: -102.0
+    y: 92.0
     z: 0.0
   }
   rotation {

@@ -27,6 +27,7 @@ function pickup(self)
 
 	msg.post("#collisionobject", "disable")
 	msg.post("#pickup", "play_sound")
+	msg.post("newcmd#script", "show_command", { cmd = "jump" })
 
 	go.animate(".", "position.y",go.PLAYBACK_ONCE_FORWARD, 10, go.EASING_LINEAR, 0.5)
 	go.animate("#sprite", "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5)
