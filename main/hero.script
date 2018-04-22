@@ -2,16 +2,17 @@ local GRAVITY = -10
 local JUMP_SPEED = 160
 local RUN_SPEED = 20
 
+go.property("direction", -1)
+
 function init(self)
 	self.velocity = vmath.vector3()
 	self.pos = go.get_position()
 	self.posLast = self.pos
-	self.direction = -1
 	self.grounded = true
 	self.groundedLast = self.grounded
 	self.curAnim = ""
 
-	turn(self)
+	sync_sprite_direction(self)
 end
 
 function update(self, dt)
@@ -45,8 +46,12 @@ end
 function turn(self)
 	if self.grounded then
 		self.direction = -self.direction
-		sprite.set_hflip("#sprite", self.direction > 0)
+		sync_sprite_direction(self)
 	end
+end
+
+function sync_sprite_direction(self)
+	sprite.set_hflip("#sprite", self.direction > 0)
 end
 
 function update_animation(self)
