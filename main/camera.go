@@ -1,7 +1,6 @@
-name: "main"
-instances {
-  id: "loader"
-  prototype: "/main/loader.go"
+components {
+  id: "script"
+  component: "/main/camera.script"
   position {
     x: 0.0
     y: 0.0
@@ -13,15 +12,16 @@ instances {
     z: 0.0
     w: 1.0
   }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
 }
-instances {
+embedded_components {
   id: "camera"
-  prototype: "/main/camera.go"
+  type: "camera"
+  data: "aspect_ratio: 1.0\n"
+  "fov: 45.0\n"
+  "near_z: 0.1\n"
+  "far_z: 1000.0\n"
+  "auto_aspect_ratio: 0\n"
+  ""
   position {
     x: 0.0
     y: 0.0
@@ -33,10 +33,4 @@ instances {
     z: 0.0
     w: 1.0
   }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
 }
-scale_along_z: 0

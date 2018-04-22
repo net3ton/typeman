@@ -1,0 +1,9 @@
+images {
+  image: "/images/typeman_cmd.png"
+}
+images {
+  image: "/images/typeman_door.png"
+}
+margin: 0
+extrude_borders: 0
+inner_padding: 0
