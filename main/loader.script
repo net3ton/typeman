@@ -11,6 +11,10 @@ function load_level01()
 	msg.post("#level01", "load")
 end
 
+function load_level02()
+	msg.post("#level02", "load")
+end
+
 function next_level()
 	--msg.post("#level01", "disable")
 	--msg.post("#level01", "final")
@@ -25,7 +29,7 @@ function on_message(self, message_id, message, sender)
 		msg.post(sender, "init")
 		msg.post(sender, "enable")
 	elseif message_id == hash("proxy_unloaded") then
-		load_level01()
+		load_level02()
 	elseif message_id == hash("next_level") then
 		next_level()
 	end
