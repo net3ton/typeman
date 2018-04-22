@@ -3,11 +3,13 @@ local JUMP_SPEED = 160
 local RUN_SPEED = 20
 
 function init(self)
-	self.direction = -1
 	self.velocity = vmath.vector3()
-
-	--self.correction = vmath.vector3()
+	self.pos = go.get_position()
+	self.posLast = self.pos
+	self.direction = -1
 	self.grounded = true
+	self.groundedLast = self.grounded
+
 	turn(self)
 end
 
@@ -17,14 +19,18 @@ function update(self, dt)
 	end
 
 	self.velocity.x = RUN_SPEED * self.direction
+	self.posLast = self.pos
+	self.pos = go.get_position()
 
 	go.set_position(go.get_position() + self.velocity * dt)
 
-	--msg.post("@render:", "draw_line", {start_point = go.get_position(), end_point = go.get_position() + self.velocity, color = vmath.vector4(0, 0, 1, 0)})
-	--self.correction = vmath.vector3()
-	--self.velocity.x = RUN_SPEED * self.direction
+	update_animation(self)
 
-	set_grounded(self, false)
+	self.groundedLast = self.grounded
+	self.grounded = false
+
+	--msg.post("@render:", "draw_line", {start_point = go.get_position(), end_point = go.get_position() + self.velocity, color = vmath.vector4(0, 0, 1, 0)})
+
 	msg.post("main:/camera#script", "slope", { val = go.get_position().x })
 end
 
@@ -42,41 +48,31 @@ function turn(self)
 	end
 end
 
-function set_grounded(self, grounded)
-	if self.grounded == grounded then
-		return
+function update_animation(self)
+	--print(math.abs(self.pos.x - self.posLast.x))
+	--if self.grounded and math.abs(self.pos.x - self.posLast.x) < 0.001 then
+	--	msg.post("#sprite", "play_animation", { id = hash("idle") })
+	--	return
+	--end
+
+	if not self.grounded == self.groundedLast then
+		if self.grounded then
+			msg.post("#sprite", "play_animation", { id = hash("run") })
+		else
+			msg.post("#sprite", "play_animation", { id = hash("jump") })
+		end
 	end
-
-	self.grounded = grounded
-
-	if grounded then
-		--print("run")
-		set_animation1(hash("run"))
-	else
-		--print("jump")
-		set_animation1(hash("jump"))
-	end
-end
-
-function set_animation1(anim)
-	--msg.post("#sprite", "play_animation", { id = amim })
 end
 
 function handle_contact(self, normal, distance)
 	--msg.post("@render:", "draw_line", {start_point = go.get_position(), end_point = go.get_position() + normal * 20, color = vmath.vector4(1, 1, 0, 0)})
-
-	--local proj = vmath.dot(self.correction, normal)
-	--local comp = (distance - proj) * normal
-
-	--self.correction = self.correction + comp
-	--go.set_position(go.get_position() + comp)
 
 	if distance > 0 then
 		go.set_position(go.get_position() + distance * normal)
 	end
 
 	if normal.y > 0.7 then
-		set_grounded(self, true)
+		self.grounded = true
 	end
 
 	local toground = vmath.dot(self.velocity, normal)

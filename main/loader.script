@@ -1,24 +1,64 @@
+LEVELS = { "#level01", "#level02" }
+LEVELS_COUNT = 2
+TITLE_SCREEN = "#title"
+FINAL_SCREEN = "#complete"
+
 function init(self)
 	msg.post(".", "acquire_input_focus")
 
-	load_level01()
+	self.curInd = 0
+	self.current = ""
+	self.levelToLoad = ""
+
+	load_next_level(self)
 end
 
---function final(self)
---end
-
-function load_level01()
-	msg.post("#level01", "load")
+function load_first_level(self)
+	self.curInd = 0
+	load_next_level(self)
 end
 
-function load_level02()
-	msg.post("#level02", "load")
+function load_next_level(self)
+	load_level(self, get_next_level_id(self))
 end
 
-function next_level()
-	--msg.post("#level01", "disable")
-	--msg.post("#level01", "final")
-	msg.post("#level01", "unload")
+function get_next_level_id(self)
+	self.curInd = self.curInd + 1
+
+	if self.curInd > LEVELS_COUNT then
+		return FINAL_SCREEN
+	end
+
+	return LEVELS[self.curInd]
+end
+
+function load_level(self, id)
+	if not (self.current == "") then
+		self.levelToLoad = id
+		--msg.post(self.current, "disable")
+		--msg.post(self.current, "final")
+		msg.post(self.current, "unload")
+	else
+		goto_level(self, id)
+	end
+end
+
+function on_level_unloaded(self)
+	if not (self.levelToLoad == "") then
+		goto_level(self, self.levelToLoad)
+		self.levelToLoad = ""
+	elseif not (self.current == "") then
+		goto_level(self, self.current)
+	end
+end
+
+function goto_level(self, id)
+	self.current = id
+	msg.post(id, "load")
+end
+
+function restart_level(self)
+	load_level(self, self.current)
 end
 
 --function update(self, dt)
@@ -29,11 +69,8 @@ function on_message(self, message_id, message, sender)
 		msg.post(sender, "init")
 		msg.post(sender, "enable")
 	elseif message_id == hash("proxy_unloaded") then
-		load_level02()
+		on_level_unloaded(self)
 	elseif message_id == hash("next_level") then
-		next_level()
+		load_next_level(self)
 	end
 end
-
---function on_input(self, action_id, action)
---end
