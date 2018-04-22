@@ -58,8 +58,10 @@ function update_animation(self)
 	if not self.grounded == self.groundedLast then
 		if self.grounded then
 			msg.post("#sprite", "play_animation", { id = hash("run") })
+			msg.post("main:/camera#script", "jump", { start = false })
 		else
 			msg.post("#sprite", "play_animation", { id = hash("jump") })
+			msg.post("main:/camera#script", "jump", { start = true })
 		end
 	end
 end
