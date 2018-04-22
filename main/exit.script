@@ -33,6 +33,7 @@ function on_message(self, message_id, message, sender)
 		self.finished = true
 		self.time = 0
 		msg.post("hero#script", "exit_level")
+		msg.post("#door", "play_sound")
 	end
 end
 

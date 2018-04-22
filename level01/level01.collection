@@ -113,7 +113,7 @@ instances {
   prototype: "/main/newcmd.go"
   position {
     x: -100.0
-    y: 95.0
+    y: 90.0
     z: 0.0
   }
   rotation {

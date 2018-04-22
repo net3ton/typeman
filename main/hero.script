@@ -47,6 +47,7 @@ function turn(self)
 	if self.grounded then
 		self.direction = -self.direction
 		sync_sprite_direction(self)
+		msg.post("#jump", "play_sound")
 	end
 end
 

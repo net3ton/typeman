@@ -15,6 +15,12 @@ function get_command(self)
 		return "jump"
 	elseif self.command == hash("turn") then
 		return "turn"
+	elseif self.command == hash("getdoor") then
+		return "get my door back"
+	elseif self.command == hash("killboss") then
+		return "finish him"
+	elseif self.command == hash("win") then
+		return "win this awesome game"
 	end
 
 	return "jump"
