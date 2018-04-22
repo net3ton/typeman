@@ -1,12 +1,16 @@
 function init(self)
 	msg.post(".", "acquire_input_focus")
+	msg.post("main:/cmdpool#script", "acquare_cmdpool")
 
 	self.cmd = ""
+	self.cmdpool = {}
+
 	update_cmd(self)
 end
 
 function final(self)
 	msg.post(".", "release_input_focus")
+	msg.post("main:/cmdpool#script", "cmdpool", { pool = self.cmdpool })
 end
 
 function update_cmd(self)
@@ -15,44 +19,37 @@ function update_cmd(self)
 	label.set_text("#cmd", self.cmd)
 end
 
-function check_cmd(cmd)
-	if cmd == "jump" then
+function check_cmd(self, cmd)
+	if cmd == "jump" and self.cmdpool.jump then
 		msg.post("hero#script", "jump")
-	elseif cmd == "turn" then
+	elseif cmd == "turn" and self.cmdpool.turn then
 		msg.post("hero#script", "turn")
 	else
 		msg.post("#wrong_cmd", "play_sound")
 	end
 end
 
-function update(self, dt)
-	-- Add update code here
-	-- Remove this function if not needed
-end
-
---function on_message(self, message_id, message, sender)
+--function update(self, dt)
 --end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("cmdpool") then
+		self.cmdpool = message.pool
+	elseif message_id == hash("new_command") then
+		self.cmdpool[message.cmd] = true
+	end
+end
 
 function on_input(self, action_id, action)
 	if action_id == hash("text") then
 		self.cmd = self.cmd .. action.text
 		update_cmd(self)
 	elseif action_id == hash("enter") and action.pressed then
-		check_cmd(self.cmd)
+		check_cmd(self, self.cmd)
 		self.cmd = ""
 		update_cmd(self)
 	elseif action_id == hash("backspace") and action.pressed then
 		self.cmd = string.sub(self.cmd, 0, -2)
 		update_cmd(self)
-
-	--elseif action_id == hash("jump") and action.pressed then
-	--	msg.post("hero#hero", "jump")
-	--elseif action_id == hash("turn") and action.pressed then
-	--	msg.post("hero#hero", "turn")
-	--elseif action_id == hash("exit") and action.pressed then
-	--	msg.post("loader#start", "load")
 	end
 end
-
---function on_reload(self)
---end

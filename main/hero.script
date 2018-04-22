@@ -50,10 +50,10 @@ function turn(self)
 end
 
 function update_animation(self)
-	if self.grounded and math.abs(self.pos.x - self.posLast.x) < 0.001 then
-		set_animation(self, "idle")
-		return
-	end
+	--if self.grounded and math.abs(self.pos.x - self.posLast.x) < 0.001 then
+	--	set_animation(self, "idle")
+	--	return
+	--end
 
 	if not (self.grounded == self.groundedLast) then
 		if self.grounded then

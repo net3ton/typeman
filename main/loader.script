@@ -15,6 +15,7 @@ end
 
 function load_first_level(self)
 	self.curInd = 0
+	msg.post("cmdpool#script", "reset_pool")
 	load_next_level(self)
 end
 
