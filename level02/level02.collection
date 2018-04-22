@@ -4,7 +4,7 @@ instances {
   prototype: "/main/hero.go"
   position {
     x: -71.0
-    y: -32.0
+    y: -60.0
     z: 0.0
   }
   rotation {
@@ -16,7 +16,7 @@ instances {
   scale3 {
     x: 1.0
     y: 1.0
-    z: 1.0
+    z: 2.0
   }
 }
 instances {
@@ -24,7 +24,7 @@ instances {
   prototype: "/main/command.go"
   position {
     x: 72.0
-    y: -16.0
+    y: -44.0
     z: 0.0
   }
   rotation {
@@ -32,6 +32,14 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "command"
+      value: "turn"
+      type: PROPERTY_TYPE_HASH
+    }
   }
   scale3 {
     x: 1.0
@@ -45,7 +53,7 @@ instances {
   children: "exitsign"
   position {
     x: -69.0
-    y: 0.0
+    y: -28.0
     z: 0.0
   }
   rotation {
@@ -65,7 +73,7 @@ instances {
   prototype: "/main/console.go"
   position {
     x: -99.0
-    y: -71.0
+    y: -99.0
     z: 0.0
   }
   rotation {
@@ -85,7 +93,27 @@ instances {
   prototype: "/main/exitsign.go"
   position {
     x: 0.0
-    y: 12.0
+    y: -16.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "newcmd"
+  prototype: "/main/newcmd.go"
+  position {
+    x: -100.0
+    y: 95.0
     z: 0.0
   }
   rotation {
@@ -244,7 +272,7 @@ embedded_instances {
   ""
   position {
     x: -94.0
-    y: -48.0
+    y: -76.0
     z: 0.0
   }
   rotation {

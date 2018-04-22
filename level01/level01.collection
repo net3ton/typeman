@@ -104,8 +104,8 @@ instances {
   id: "newcmd"
   prototype: "/main/newcmd.go"
   position {
-    x: -102.0
-    y: 92.0
+    x: -100.0
+    y: 95.0
     z: 0.0
   }
   rotation {
