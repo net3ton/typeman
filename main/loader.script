@@ -1,16 +1,21 @@
-LEVELS = { "#level01", "#level02" }
-LEVELS_COUNT = 2
+LEVELS = { "#level01", "#level02", "#level03", "#level04", "#level05" }
+LEVELS_COUNT = 5
 TITLE_SCREEN = "#title"
 FINAL_SCREEN = "#complete"
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
 
-	self.curInd = 0
+	self.curInd = 2
 	self.current = ""
 	self.levelToLoad = ""
 
 	load_next_level(self)
+	--load_start_screen(self)
+end
+
+function load_start_screen(self)
+	load_level(self, TITLE_SCREEN)
 end
 
 function load_first_level(self)
@@ -71,6 +76,8 @@ function on_message(self, message_id, message, sender)
 		msg.post(sender, "enable")
 	elseif message_id == hash("proxy_unloaded") then
 		on_level_unloaded(self)
+	elseif message_id == hash("start_game") then
+		load_first_level(self)
 	elseif message_id == hash("next_level") then
 		load_next_level(self)
 	end

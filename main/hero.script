@@ -1,5 +1,6 @@
 local GRAVITY = -10
-local JUMP_SPEED = 160
+local JUMP_SPEED_Y = 160
+local JUMP_SPEED_X = 50
 local RUN_SPEED = 20
 
 go.property("direction", -1)
@@ -18,9 +19,11 @@ end
 function update(self, dt)
 	if not self.grounded then
 		self.velocity = self.velocity + vmath.vector3(0, GRAVITY, 0)
+		self.velocity.x = JUMP_SPEED_X * self.direction
+	else
+		self.velocity.x = RUN_SPEED * self.direction
 	end
 
-	self.velocity.x = RUN_SPEED * self.direction
 	self.posLast = self.pos
 	self.pos = go.get_position()
 
@@ -38,7 +41,7 @@ end
 
 function jump(self)
 	if self.grounded then
-		self.velocity.y = JUMP_SPEED
+		self.velocity.y = JUMP_SPEED_Y
 		msg.post("#jump", "play_sound")
 	end
 end

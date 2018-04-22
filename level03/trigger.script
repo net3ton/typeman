@@ -1,0 +1,10 @@
+function init(self)
+	self.enabled = true
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("contact_point_response") and self.enabled then
+		self.enabled = false
+		msg.post("exit#script", "move_to_top")
+	end
+end

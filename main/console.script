@@ -24,6 +24,8 @@ function check_cmd(self, cmd)
 		msg.post("hero#script", "jump")
 	elseif cmd == "turn" and self.cmdpool.turn then
 		msg.post("hero#script", "turn")
+	elseif cmd == "get my door back" then
+		msg.post("exit#script", "get_it_back")
 	else
 		msg.post("#wrong_cmd", "play_sound")
 	end
