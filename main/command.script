@@ -18,9 +18,25 @@ function get_command(self)
 	elseif self.command == hash("getdoor") then
 		return "get my door back"
 	elseif self.command == hash("killboss") then
-		return "finish him"
+		return "finish him or her"
 	elseif self.command == hash("win") then
 		return "win this awesome game"
+	end
+
+	return "jump"
+end
+
+function get_command_id(self)
+	if self.command == hash("jump") then
+		return "jump"
+	elseif self.command == hash("turn") then
+		return "turn"
+	elseif self.command == hash("getdoor") then
+		return "getdoor"
+	elseif self.command == hash("killboss") then
+		return "killboss"
+	elseif self.command == hash("win") then
+		return "win"
 	end
 
 	return "jump"
@@ -44,8 +60,9 @@ function pickup(self)
 	msg.post("#pickup", "play_sound")
 
 	local cmdname = get_command(self)
+	local cmdid = get_command_id(self)
 	msg.post("newcmd#script", "show_command", { cmd = cmdname })
-	msg.post("console#script", "new_command", { cmd = cmdname })
+	msg.post("console#script", "new_command", { cmd = cmdid })
 
 	go.animate(".", "position.y",go.PLAYBACK_ONCE_FORWARD, 5, go.EASING_LINEAR, 0.5)
 	go.animate("#sprite", "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5)

@@ -1,21 +1,26 @@
-LEVELS = { "#level01", "#level02", "#level03", "#level04", "#level05" }
-LEVELS_COUNT = 5
+LEVELS = { "#level01", "#level02", "#level03", "#level05" }
+LEVELS_COUNT = 4
 TITLE_SCREEN = "#title"
 FINAL_SCREEN = "#complete"
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
 
-	self.curInd = 4
+	self.curInd = 0
 	self.current = ""
 	self.levelToLoad = ""
 
 	load_next_level(self)
 	--load_start_screen(self)
+	--load_win_screen(self)
 end
 
 function load_start_screen(self)
 	load_level(self, TITLE_SCREEN)
+end
+
+function load_win_screen(self)
+	load_level(self, FINAL_SCREEN)
 end
 
 function load_first_level(self)
@@ -67,9 +72,6 @@ function restart_level(self)
 	load_level(self, self.current)
 end
 
---function update(self, dt)
---end
-
 function on_message(self, message_id, message, sender)
 	if message_id == hash("proxy_loaded") then
 		msg.post(sender, "init")
@@ -80,5 +82,7 @@ function on_message(self, message_id, message, sender)
 		load_first_level(self)
 	elseif message_id == hash("next_level") then
 		load_next_level(self)
+	elseif message_id == hash("finish_game") then
+		load_win_screen(self)
 	end
 end

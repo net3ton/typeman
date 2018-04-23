@@ -24,8 +24,12 @@ function check_cmd(self, cmd)
 		msg.post("hero#script", "jump")
 	elseif cmd == "turn" and self.cmdpool.turn then
 		msg.post("hero#script", "turn")
-	elseif cmd == "get my door back" then
+	elseif cmd == "get my door back" and self.cmdpool.getdoor then
 		msg.post("exit#script", "get_it_back")
+	elseif cmd == "finish him or her" and self.cmdpool.killboss then
+		msg.post("main:/loader#script", "finish_game")
+	elseif cmd == "restart" then
+		msg.post("main:/loader#script", "start_game")
 	else
 		msg.post("#wrong_cmd", "play_sound")
 	end

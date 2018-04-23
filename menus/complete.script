@@ -1,0 +1,4 @@
+function init(self)
+	msg.post("newcmd#script", "show_command", { cmd = "restart" })
+	msg.post("main:/camera#script", "slope", { val = 0 })
+end
