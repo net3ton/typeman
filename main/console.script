@@ -29,7 +29,10 @@ function check_cmd(self, cmd)
 	elseif cmd == "finishhimorher" and self.cmdpool.killboss then
 		msg.post("main:/loader#script", "finish_game")
 	elseif cmd == "restart" then
+		self.cmdpool = {}
 		msg.post("main:/loader#script", "start_game")
+	elseif cmd == "run" then
+		msg.post("hero#script", "run")
 	else
 		msg.post("#wrong_cmd", "play_sound")
 	end

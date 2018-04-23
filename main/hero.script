@@ -4,6 +4,7 @@ local JUMP_SPEED_X = 50
 local RUN_SPEED = 20
 
 go.property("direction", -1)
+go.property("stopped", false)
 
 function init(self)
 	self.velocity = vmath.vector3()
@@ -20,7 +21,7 @@ function update(self, dt)
 	if not self.grounded then
 		self.velocity = self.velocity + vmath.vector3(0, GRAVITY, 0)
 		self.velocity.x = JUMP_SPEED_X * self.direction
-	else
+	elseif not self.stopped then
 		self.velocity.x = RUN_SPEED * self.direction
 	end
 
@@ -37,6 +38,11 @@ function update(self, dt)
 	--msg.post("@render:", "draw_line", {start_point = go.get_position(), end_point = go.get_position() + self.velocity, color = vmath.vector4(0, 0, 1, 0)})
 
 	msg.post("main:/camera#script", "slope", { val = go.get_position().x })
+end
+
+function run(self)
+	msg.post("#jump", "play_sound")
+	self.stopped = false
 end
 
 function jump(self)
@@ -103,8 +109,9 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("contact_point_response") then
 		if message.group == hash("ground") then
 			handle_contact(self, message.normal, message.distance)
-		--elseif message.group == hash("dunger") then
 		end
+	elseif message_id == hash("run") then
+		run(self)
 	elseif message_id == hash("jump") then
 		jump(self)
 	elseif message_id == hash("turn") then
