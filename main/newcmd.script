@@ -4,6 +4,9 @@ local SHOW = 10
 function init(self)
 	self.time = 0
 	self.showing = false;
+	self.colorCmd = go.get("#cmd", "color")
+	self.colorPromt = go.get("#info", "color")
+
 	msg.post(".", "disable")
 end
 
@@ -21,6 +24,9 @@ end
 function show_new_command(self, command)
 	msg.post(".", "enable")
 	label.set_text("#cmd", command)
+
+	go.set("#cmd", "color", self.colorCmd)
+	go.set("#info", "color", self.colorPromt)
 
 	go.animate("#cmd", "color", go.PLAYBACK_LOOP_PINGPONG, vmath.vector4(0,0,0,0), go.EASING_INCIRC, 1)
 	go.animate("#info", "color", go.PLAYBACK_LOOP_PINGPONG, vmath.vector4(0,0,0,0), go.EASING_INCIRC, 1)
