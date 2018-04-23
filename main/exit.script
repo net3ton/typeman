@@ -31,5 +31,6 @@ function on_message(self, message_id, message, sender)
 		go.animate(".", "position.y",go.PLAYBACK_ONCE_FORWARD, 75, go.EASING_OUTSINE, 1)
 	elseif message_id == hash("get_it_back") then
 		go.animate(".", "position.y",go.PLAYBACK_ONCE_FORWARD, self.pos.y, go.EASING_LINEAR, 1)
+		msg.post("#door", "play_sound")
 	end
 end

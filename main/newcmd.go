@@ -51,7 +51,7 @@ embedded_components {
   "pivot: PIVOT_SW\n"
   "blend_mode: BLEND_MODE_ALPHA\n"
   "line_break: false\n"
-  "text: \"new commnd:\"\n"
+  "text: \"new command:\"\n"
   "font: \"/fonts/main.font\"\n"
   "material: \"/fonts/pexellabel.material\"\n"
   ""
