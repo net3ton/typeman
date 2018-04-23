@@ -1,6 +1,7 @@
-# typeman
-Type to WIN. LudumDare 41 game
-Platformer meets command prompt, player meets the megaboss!
+# Type to WIN
 
-Play in browser (HTML5 version):
+Platformer meets command prompt, player meets the megaboss!\n
+Ludum Dare 41 game. Theme: Combine 2 Incompatible Genres.
+
+Play in browser (HTML5 version):\n
 https://net3ton.itch.io/type-to-win
