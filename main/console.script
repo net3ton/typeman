@@ -15,7 +15,7 @@ end
 
 function update_cmd(self)
 	self.cmd = string.lower(self.cmd)
-	--self.cmd = string.gsub(self.cmd, "%s+", "")
+	self.cmd = string.gsub(self.cmd, "%s+", "")
 	label.set_text("#cmd", self.cmd)
 end
 
@@ -24,9 +24,9 @@ function check_cmd(self, cmd)
 		msg.post("hero#script", "jump")
 	elseif cmd == "turn" and self.cmdpool.turn then
 		msg.post("hero#script", "turn")
-	elseif cmd == "get my door back" and self.cmdpool.getdoor then
+	elseif cmd == "getmydoorback" and self.cmdpool.getdoor then
 		msg.post("exit#script", "get_it_back")
-	elseif cmd == "finish him or her" and self.cmdpool.killboss then
+	elseif cmd == "finishhimorher" and self.cmdpool.killboss then
 		msg.post("main:/loader#script", "finish_game")
 	elseif cmd == "restart" then
 		msg.post("main:/loader#script", "start_game")
@@ -36,6 +36,7 @@ function check_cmd(self, cmd)
 end
 
 --function update(self, dt)
+	--while self.cmd
 --end
 
 function on_message(self, message_id, message, sender)
@@ -53,6 +54,7 @@ function on_input(self, action_id, action)
 	elseif action_id == hash("enter") and action.pressed then
 		check_cmd(self, self.cmd)
 		self.cmd = ""
+		--self.cmd = string.sub(self.cmd, 0, -2)
 		update_cmd(self)
 	elseif action_id == hash("backspace") and action.pressed then
 		self.cmd = string.sub(self.cmd, 0, -2)
