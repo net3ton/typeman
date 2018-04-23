@@ -3,8 +3,8 @@ instances {
   id: "console"
   prototype: "/main/console.go"
   position {
-    x: -101.0
-    y: -102.0
+    x: -100.0
+    y: -100.0
     z: 0.0
   }
   rotation {
@@ -23,7 +23,7 @@ instances {
   id: "newcmd"
   prototype: "/main/newcmd.go"
   position {
-    x: -102.0
+    x: -100.0
     y: 90.0
     z: 0.0
   }
@@ -98,8 +98,8 @@ embedded_instances {
   "text: \\\"Congratulations!\\\\n"
   "\\\"\\n"
   "  \\\"You WIN\\\"\\n"
-  "font: \\\"/builtins/fonts/system_font.font\\\"\\n"
-  "material: \\\"/builtins/fonts/label.material\\\"\\n"
+  "font: \\\"/fonts/main.font\\\"\\n"
+  "material: \\\"/fonts/pexellabel.material\\\"\\n"
   "\"\n"
   "  position {\n"
   "    x: 0.0\n"

@@ -61,18 +61,18 @@ embedded_components {
   "  z: 0.0\n"
   "  w: 1.0\n"
   "}\n"
-  "leading: 1.0\n"
+  "leading: 0.0\n"
   "tracking: 0.0\n"
   "pivot: PIVOT_SW\n"
   "blend_mode: BLEND_MODE_ALPHA\n"
   "line_break: false\n"
   "text: \"cmd:\"\n"
-  "font: \"/builtins/fonts/system_font.font\"\n"
-  "material: \"/builtins/fonts/label.material\"\n"
+  "font: \"/fonts/main.font\"\n"
+  "material: \"/fonts/pexellabel.material\"\n"
   ""
   position {
     x: 0.0
-    y: 0.0
+    y: 4.0
     z: 0.0
   }
   rotation {
@@ -123,12 +123,12 @@ embedded_components {
   "text: \"cmd\\n"
   "\"\n"
   "  \"\"\n"
-  "font: \"/fonts/system_font.font\"\n"
-  "material: \"/builtins/fonts/label.material\"\n"
+  "font: \"/fonts/main.font\"\n"
+  "material: \"/fonts/pexellabel.material\"\n"
   ""
   position {
-    x: 33.0
-    y: 0.0
+    x: 30.0
+    y: 4.0
     z: 0.0
   }
   rotation {

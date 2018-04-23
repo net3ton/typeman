@@ -52,12 +52,12 @@ embedded_components {
   "blend_mode: BLEND_MODE_ALPHA\n"
   "line_break: false\n"
   "text: \"new commnd:\"\n"
-  "font: \"/builtins/fonts/system_font.font\"\n"
-  "material: \"/builtins/fonts/label.material\"\n"
+  "font: \"/fonts/main.font\"\n"
+  "material: \"/fonts/pexellabel.material\"\n"
   ""
   position {
     x: 0.0
-    y: 0.0
+    y: 5.0
     z: 0.0
   }
   rotation {
@@ -106,12 +106,12 @@ embedded_components {
   "blend_mode: BLEND_MODE_ALPHA\n"
   "line_break: false\n"
   "text: \"command\"\n"
-  "font: \"/builtins/fonts/system_font.font\"\n"
-  "material: \"/builtins/fonts/label.material\"\n"
+  "font: \"/fonts/main.font\"\n"
+  "material: \"/fonts/pexellabel.material\"\n"
   ""
   position {
     x: 0.0
-    y: -17.0
+    y: -7.0
     z: 0.0
   }
   rotation {
