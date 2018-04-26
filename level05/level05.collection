@@ -1,4 +1,4 @@
-name: "default"
+name: "level05"
 instances {
   id: "console"
   prototype: "/main/console.go"

@@ -1,4 +1,4 @@
-name: "default"
+name: "level02"
 instances {
   id: "hero"
   prototype: "/main/hero.go"
