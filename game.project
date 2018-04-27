@@ -24,3 +24,8 @@ shared_state = 1
 default_texture_min_filter = nearest
 default_texture_mag_filter = nearest
 
+[osx]
+app_icon = /bundle/icon.icns
+bundle_identifier = com.oskharkov.typeman
+infoplist = 
+
