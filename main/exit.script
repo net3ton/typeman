@@ -22,7 +22,7 @@ function exit_level(self)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("contact_point_response") and not self.finished then
+	if message_id == hash("trigger_response") and message.enter and not self.finished then
 		self.finished = true
 		self.time = 0
 		msg.post("hero#script", "exit_level")
