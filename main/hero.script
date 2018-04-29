@@ -9,15 +9,20 @@ go.property("stopped", false)
 function init(self)
 	self.velocity = vmath.vector3()
 	self.pos = go.get_position()
-	self.posLast = self.pos
+	self.posLast = go.get_position()
 	self.grounded = true
-	self.groundedLast = self.grounded
 	self.curAnim = ""
 
+	self.correction = vmath.vector3()
 	sync_sprite_direction(self)
 end
 
 function update(self, dt)
+	self.posLast = self.pos
+	self.pos = self.pos + self.correction
+	self.correction = vmath.vector3()
+	go.set_position(self.pos)
+
 	if not self.grounded then
 		self.velocity = self.velocity + vmath.vector3(0, GRAVITY, 0)
 		self.velocity.x = JUMP_SPEED_X * self.direction
@@ -25,17 +30,10 @@ function update(self, dt)
 		self.velocity.x = RUN_SPEED * self.direction
 	end
 
-	self.posLast = self.pos
-	self.pos = go.get_position()
-
-	go.set_position(go.get_position() + self.velocity * dt)
+	self.pos = self.pos + self.velocity * dt
 
 	update_animation(self)
-
-	self.groundedLast = self.grounded
 	self.grounded = false
-
-	--msg.post("@render:", "draw_line", {start_point = go.get_position(), end_point = go.get_position() + self.velocity, color = vmath.vector4(0, 0, 1, 0)})
 
 	msg.post("main:/camera#script", "slope", { val = go.get_position().x })
 end
@@ -65,19 +63,14 @@ function sync_sprite_direction(self)
 end
 
 function update_animation(self)
-	--if self.grounded and math.abs(self.pos.x - self.posLast.x) < 0.001 then
-	--	set_animation(self, "idle")
-	--	return
-	--end
-
-	if not (self.grounded == self.groundedLast) then
-		if self.grounded then
-			set_animation(self, "run")
-			msg.post("main:/camera#script", "jump", { start = false })
+	if self.grounded then
+		if math.abs(self.pos.x - self.posLast.x) < 0.001 then
+			set_animation(self, "idle")
 		else
-			set_animation(self, "jump")
-			msg.post("main:/camera#script", "jump", { start = true })
+			set_animation(self, "run")
 		end
+	else
+		set_animation(self, "jump")
 	end
 end
 
@@ -85,15 +78,25 @@ function set_animation(self, anim_str)
 	if not (self.curAnim == anim_str) then
 		self.curAnim = anim_str
 		msg.post("#sprite", "play_animation", { id = hash(anim_str) })
+
+		if anim_str == "jump" then
+			msg.post("main:/camera#script", "jump", { start = true })
+		else
+			msg.post("main:/camera#script", "jump", { start = false })
+		end
 	end
 end
 
 function handle_contact(self, normal, distance)
-	--msg.post("@render:", "draw_line", {start_point = go.get_position(), end_point = go.get_position() + normal * 20, color = vmath.vector4(1, 1, 0, 0)})
-
 	if distance > 0 then
-		go.set_position(go.get_position() + distance * normal)
+		local proj = vmath.project(self.correction, normal * distance)
+		if proj < 1 then
+			local comp = distance * (1 - proj) * normal
+			self.correction = self.correction + comp
+		end
 	end
+
+	--msg.post("@render:", "draw_line", {start_point = go.get_position(), end_point = go.get_position() + normal * 20, color = vmath.vector4(1, 1, 0, 0)})
 
 	if normal.y > 0.7 then
 		self.grounded = true
