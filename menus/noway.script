@@ -1,0 +1,16 @@
+function init(self)
+	--go.animate(".", "position.y",go.PLAYBACK_LOOP_PINGPONG, 2, go.EASING_INOUTQUAD, 2)
+
+	self.time = 0
+	self.pos = go.get_position()
+end
+
+function update(self, dt)
+	self.time = self.time + dt * 2
+
+	local curentPos = vmath.vector3(self.pos)
+	curentPos.y = self.pos.y + (math.cos(self.time) + 1) * 1.0
+
+	go.set_position(curentPos)
+	go.set_rotation(vmath.quat_rotation_z(0.4 +  math.cos(self.time * 1.5) / 10))
+end

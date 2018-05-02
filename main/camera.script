@@ -13,6 +13,7 @@ function init(self)
 
 	self.posToMIN = self.pos.y - FLOATING
 	self.posToMAX = self.pos.y + FLOATING
+	self.startY = self.pos.y
 end
 
 function update(self, dt)
@@ -29,6 +30,10 @@ function update(self, dt)
 
 	go.set_position(self.pos)
 	go.set_rotation(vmath.quat_rotation_z(self.rotation))
+
+	local main = require "main.main"
+	main.rotation = self.rotation
+	main.offset = self.pos.y - self.startY
 end
 
 function on_message(self, message_id, message, sender)

@@ -10,6 +10,18 @@ images {
 images {
   image: "/images/typeman_door.png"
 }
+images {
+  image: "/images/typeman_booth.png"
+}
+images {
+  image: "/images/typeman_noway.png"
+}
+images {
+  image: "/images/typeman_crowd.png"
+}
+images {
+  image: "/images/typeman_pillar.png"
+}
 margin: 0
 extrude_borders: 0
 inner_padding: 0

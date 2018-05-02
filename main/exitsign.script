@@ -47,6 +47,3 @@ function turnon_sign(is_on)
 		msg.post("#sprite", "play_animation", { id = hash("typeman_sign") })
 	end
 end
-
-function on_message(self, message_id, message, sender)
-end

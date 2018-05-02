@@ -2,7 +2,8 @@ local Main = {}
 
 Main.version = 0
 Main.pool = {}
---Main.pool_v1 = { jump = true, turn = true, getdoor = true, killboss = true }
+Main.rotation = 0
+Main.offset = 0
 
 function Main.inc_version()
 	Main.version = Main.version + 1
@@ -16,10 +17,10 @@ function Main.has_command(cmd)
 	return Main.pool[hash(cmd)]
 end
 
---function Main.go_to_ver1()
---	Main.add_new_command(hash("jump"))
---	Main.add_new_command(hash("turn"))
---end
+function Main.go_to_ver1()
+	Main.add_new_command(hash("jump"))
+	Main.add_new_command(hash("turn"))
+end
 
 function Main.get_command_name(cmdhash)
 	if cmdhash == hash("jump") then

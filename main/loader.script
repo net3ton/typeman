@@ -12,6 +12,9 @@ function init(self)
 
 	load_start_screen(self)
 	--load_win_screen(self)
+
+	local main = require "main.main"
+	main.go_to_ver1()
 end
 
 function load_start_screen(self)
@@ -82,6 +85,6 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("finish_game") then
 		load_win_screen(self)
 	elseif message_id == hash("papers_level") then
-		
+		load_level(self, "#level04")
 	end
 end
