@@ -1,7 +1,7 @@
-LEVELS = { "#level01", "#level02", "#level03", "#level05" }
-LEVELS_COUNT = 4
-TITLE_SCREEN = "#title"
-FINAL_SCREEN = "#complete"
+local LEVELS = { "#level01", "#level02", "#level03", "#level05" }
+local LEVELS_COUNT = 4
+local TITLE_SCREEN = "#title"
+local FINAL_SCREEN = "#complete"
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
@@ -16,12 +16,14 @@ end
 
 function load_start_screen(self)
 	self.curInd = 0
-	msg.post("cmdpool#script", "reset_pool")
 	load_level(self, TITLE_SCREEN)
 end
 
 function load_win_screen(self)
 	load_level(self, FINAL_SCREEN)
+
+	local main = require "main.main"
+	main.inc_version()
 end
 
 function load_next_level(self)

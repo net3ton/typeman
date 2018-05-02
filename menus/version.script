@@ -1,0 +1,4 @@
+function init(self)
+	local main = require "main.main"
+	label.set_text("#version", "ver 1." .. main.version)
+end
