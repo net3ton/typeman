@@ -81,5 +81,7 @@ function on_message(self, message_id, message, sender)
 		load_next_level(self)
 	elseif message_id == hash("finish_game") then
 		load_win_screen(self)
+	elseif message_id == hash("papers_level") then
+		
 	end
 end
