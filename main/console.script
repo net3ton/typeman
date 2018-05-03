@@ -2,6 +2,7 @@ function init(self)
 	msg.post(".", "acquire_input_focus")
 
 	self.cmd = ""
+	self.time = 0
 	update_cmd(self)
 end
 
@@ -13,9 +14,10 @@ function update_cmd(self)
 	self.cmd = string.lower(self.cmd)
 	self.cmd = string.gsub(self.cmd, "%s+", "")
 	label.set_text("#cmd", self.cmd)
+	self.time = 0
 end
 
-function check_cmd(self, cmd)
+function check_cmd(cmd)
 	local main = require "main.main"
 
 	if cmd == "jump" and main.has_command("jump")then
@@ -36,20 +38,69 @@ function check_cmd(self, cmd)
 	end
 end
 
---function update(self, dt)
-	--while self.cmd
---end
+function update(self, dt)
+	self.time = self.time + dt
+	if self.time > 0.5 then
+		self.time = 0
+		blink_slash(self)
+	end
+end
 
 function on_input(self, action_id, action)
 	if action_id == hash("text") then
-		self.cmd = self.cmd .. action.text
+		--self.cmd = self.cmd .. action.text
+		self.cmd = add_text(self.cmd, action.text)
 		update_cmd(self)
 	elseif action_id == hash("enter") and action.pressed then
-		check_cmd(self, self.cmd)
+		check_cmd(get_command(self.cmd))
 		self.cmd = ""
 		update_cmd(self)
 	elseif action_id == hash("backspace") and action.pressed then
-		self.cmd = string.sub(self.cmd, 0, -2)
+		--self.cmd = string.sub(self.cmd, 0, -2)
+		self.cmd = backspace(self.cmd)
 		update_cmd(self)
 	end
+end
+
+function get_command(text)
+	if #text > 0 and string.sub(text, -1) == "_" then
+		return string.sub(text, 0, -2)
+	end
+
+	return text
+end
+
+function add_text(current, text)
+	if #current > 0 and string.sub(current, -1) == "_" then
+		current = string.sub(current, 0, -2)
+	end
+
+	return current .. text
+end
+
+function backspace(current)
+	if #current > 0 then 
+		if string.sub(current, -1) == "_" then
+			return string.sub(current, 0, -3)
+		else
+			return string.sub(current, 0, -2)
+		end
+	end
+
+	return current
+end
+
+function blink_slash(self)
+	local len = #self.cmd
+	if len > 0 then
+		if string.sub(self.cmd, -1) == "_" then
+			self.cmd = string.sub(self.cmd, 0, -2)
+		else
+			self.cmd = self.cmd .. "_"
+		end
+	else
+		self.cmd = self.cmd .. "_"
+	end
+
+	update_cmd(self)
 end
