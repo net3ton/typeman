@@ -1,3 +1,23 @@
+
+local function get_ratio_correction_mx()
+    local width = render.get_width()
+    local height = render.get_height()
+    local window_width = render.get_window_width()
+    local window_height = render.get_window_height()
+
+    local mx = vmath.matrix4()
+    local zoomx = window_width / width
+    local zoomy = window_height / height
+
+    if zoomx > zoomy then
+        mx.m00 = zoomy / zoomx
+    else
+        mx.m11 = zoomx / zoomy
+    end
+
+    return mx
+end
+
 function init(self)
     self.tile_pred = render.predicate({"tile"})
     self.gui_pred = render.predicate({"gui"})
@@ -30,7 +50,7 @@ function update(self)
     render.disable_state(render.STATE_CULL_FACE)
 
     -- camera projection
-    render.set_projection(self.projection)
+    render.set_projection(self.projection * get_ratio_correction_mx())
 
     render.draw(self.tile_pred)
     render.draw(self.particle_pred)
