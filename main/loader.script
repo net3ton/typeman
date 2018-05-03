@@ -1,6 +1,6 @@
-local LEVELS = { "#level01", "#level02", "#level03", "#level05" }
+local LEVELS = { "#main01", "#level01", "#level02", "#level03", "#level05" }
 local LEVELS_COUNT = 4
-local TITLE_SCREEN = "#title"
+local TITLE_SCREEN = "#main00"
 local FINAL_SCREEN = "#complete"
 
 function init(self)

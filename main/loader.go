@@ -50,9 +50,9 @@ embedded_components {
   }
 }
 embedded_components {
-  id: "title"
+  id: "main00"
   type: "collectionproxy"
-  data: "collection: \"/menus/title.collection\"\n"
+  data: "collection: \"/main00/main00.collection\"\n"
   "exclude: false\n"
   ""
   position {
@@ -125,6 +125,24 @@ embedded_components {
   id: "complete"
   type: "collectionproxy"
   data: "collection: \"/menus/complete.collection\"\n"
+  "exclude: false\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+}
+embedded_components {
+  id: "main01"
+  type: "collectionproxy"
+  data: "collection: \"/main01/main01.collection\"\n"
   "exclude: false\n"
   ""
   position {

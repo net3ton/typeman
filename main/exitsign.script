@@ -1,3 +1,5 @@
+go.property("turnon", true)
+
 function init(self)
 	--go.animate(".", "position.y",go.PLAYBACK_LOOP_PINGPONG, 2, go.EASING_INOUTQUAD, 2)
 	--go.animate("#sprite", "tint.w", go.PLAYBACK_LOOP_PINGPONG, 0, go.EASING_INOUTSINE, 2)
@@ -7,6 +9,10 @@ function init(self)
 
 	self.timeLight = 2
 	self.indLight = 1
+
+	if not self.turnon then
+		msg.post("#sprite", "play_animation", { id = hash("typeman_sign") })
+	end
 end
 
 local ANIM = { {time = 2, on = true}, {time = 0.1, on = false}, {time = 0.2, on = true}, {time = 0.1, on = false} }
@@ -21,9 +27,11 @@ function update(self, dt)
 	go.set_position(curentPos)
 	go.set_rotation(vmath.quat_rotation_z(math.sin(self.time * 1.5) / 10))
 
-	self.timeLight = self.timeLight - dt
-	if self.timeLight <= 0 then
-		update_sign(self)
+	if self.turnon then
+		self.timeLight = self.timeLight - dt
+		if self.timeLight <= 0 then
+			update_sign(self)
+		end
 	end
 end
 

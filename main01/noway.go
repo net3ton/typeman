@@ -1,6 +1,6 @@
 components {
   id: "script"
-  component: "/menus/noway.script"
+  component: "/main01/noway.script"
   position {
     x: 0.0
     y: 0.0
