@@ -140,9 +140,9 @@ embedded_components {
   }
 }
 embedded_components {
-  id: "main01"
+  id: "main02"
   type: "collectionproxy"
-  data: "collection: \"/main01/main01.collection\"\n"
+  data: "collection: \"/main02/main02.collection\"\n"
   "exclude: false\n"
   ""
   position {
