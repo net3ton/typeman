@@ -1,4 +1,4 @@
-local LEVELS = { "#main02", "#level01", "#level02", "#level03", "#level05" }
+local LEVELS = { "#main01", "#main02", "#level01", "#level02", "#level03", "#level05" }
 local LEVELS_COUNT = 4
 local TITLE_SCREEN = "#main00"
 local FINAL_SCREEN = "#complete"

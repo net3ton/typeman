@@ -20,6 +20,7 @@ end
 function Main.go_to_ver1()
 	Main.add_new_command(hash("jump"))
 	Main.add_new_command(hash("turn"))
+	Main.add_new_command(hash("getdoor"))
 end
 
 function Main.get_command_name(cmdhash)

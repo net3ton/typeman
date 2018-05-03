@@ -29,3 +29,6 @@ app_icon = /bundle/icon.icns
 bundle_identifier = com.oskharkov.typeman
 infoplist = 
 
+[collection_proxy]
+max_count = 16
+
