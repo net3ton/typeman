@@ -3,15 +3,15 @@ go.property("hint", 0)
 function init(self)
 	go.set("exit", "position", vmath.vector3(32, 150, 0))
 
-	go.animate("#", "hint", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 2.0, 0, fade_hint)
+	--go.animate("#", "hint", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 2.0, 0, fade_hint)
 end
 
-function fade_hint()
-	go.animate("hint#hint", "color", go.PLAYBACK_ONCE_FORWARD, vmath.vector4(0,0,0,0), go.EASING_LINEAR, 1.0, 0, fade_hint2)
-end
+--function fade_hint()
+--	go.animate("hint#hint", "color", go.PLAYBACK_ONCE_FORWARD, vmath.vector4(0,0,0,0), go.EASING_LINEAR, 1.0, 0, fade_hint2)
+--end
 
-function fade_hint2()
-	go.animate("hint#hint1", "color", go.PLAYBACK_ONCE_FORWARD, vmath.vector4(0,0,0,0), go.EASING_LINEAR, 1.0)
-	go.animate("hint#hint2", "color", go.PLAYBACK_ONCE_FORWARD, vmath.vector4(0,0,0,0), go.EASING_LINEAR, 1.0)
-	go.animate("hint#run", "color", go.PLAYBACK_ONCE_FORWARD, vmath.vector4(0,0,0,0), go.EASING_LINEAR, 1.0)
-end
+--function fade_hint2()
+--	go.animate("hint#hint1", "color", go.PLAYBACK_ONCE_FORWARD, vmath.vector4(0,0,0,0), go.EASING_LINEAR, 1.0)
+--	go.animate("hint#hint2", "color", go.PLAYBACK_ONCE_FORWARD, vmath.vector4(0,0,0,0), go.EASING_LINEAR, 1.0)
+--	go.animate("hint#run", "color", go.PLAYBACK_ONCE_FORWARD, vmath.vector4(0,0,0,0), go.EASING_LINEAR, 1.0)
+--end

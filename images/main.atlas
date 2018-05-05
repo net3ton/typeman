@@ -25,6 +25,9 @@ images {
 images {
   image: "/images/typeman_door_closed.png"
 }
+images {
+  image: "/images/typeman_door_place.png"
+}
 margin: 0
 extrude_borders: 0
 inner_padding: 0
