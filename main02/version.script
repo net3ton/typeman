@@ -1,8 +1,0 @@
-function init(self)
-	local main = require "main.main"
-	label.set_text("#version", "ver 1." .. main.version)
-
-	if main.version > 0 then
-		msg.post("hint", "disable")
-	end
-end

@@ -14,9 +14,6 @@ images {
   image: "/images/typeman_booth.png"
 }
 images {
-  image: "/images/typeman_noway.png"
-}
-images {
   image: "/images/typeman_crowd.png"
 }
 images {
